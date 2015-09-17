@@ -8,6 +8,12 @@ class GOLTests: XCTestCase {
         [true, true, true],
         [false, true, true]
     ]
+    
+    var statesInfinite: [[Bool]] = [
+        [false, true, false],
+        [true, false, true],
+        [false, true, false]
+    ]
 
     override func setUp() {
         super.setUp()
@@ -31,6 +37,27 @@ class GOLTests: XCTestCase {
         ]
         XCTAssertEqual(expected, nextStates)
     }
+    
+    func testGOLInfinite() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        var nextStates: [[Bool]] = nextCellStates(self.statesInfinite)
+        let expected: [[Bool]] = [
+        [false, true, false],
+        [true, false, true],
+        [false, true, false]
+        ]
+        XCTAssertEqual(expected, nextStates)
+        nextStates = nextCellStates(self.statesInfinite)
+        XCTAssertEqual(expected, nextStates)
+        nextStates = nextCellStates(self.statesInfinite)
+        XCTAssertEqual(expected, nextStates)
+        XCTAssertEqual(expected, nextStates)
+        XCTAssertEqual(expected, nextStates)
+        XCTAssertEqual(expected, nextStates)
+        nextStates = nextCellStates(self.statesInfinite)
+    }
+
 }
 
 class LRUCacheTests: XCTestCase {
