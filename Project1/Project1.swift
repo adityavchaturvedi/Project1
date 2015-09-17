@@ -84,27 +84,36 @@ func nextCellStates(currentStates: [[Bool]]) -> [[Bool]] {
 
 class LRUCache<K:Hashable, V> {
     private var capacity: Int
-    var dictx = Dictionary<K, V>()
+    var dictx = Dictionary<K, V>() //Dictionary for the key-value pair
+    var listLRU: [K] = [] //List to track least recently used key
     
     init(capacity: Int) {
         self.capacity = capacity
     }
     
     func get(k: K) -> V? {
-        // IMPLEMENT ME
+        // If key already exists, move it to front of the list
+        if (listLRU.contains(k)) {
+            listLRU.removeAtIndex(listLRU.indexOf(k)!)
+            listLRU.append(k)
+        }
         let v = dictx[k]
         return v
     }
     
     func set(k: K, v: V) {
-        // IMPLEMENT ME
-        dictx[k] = v
-        
-        
-        /*
-        * Set or insert the value if the key is not already present.
-        * When the cache reached its capacity, it should invalidate the
-        * least recently used item before inserting a new item.
-        */
+        // Check if key exists -> move it to the front
+        if listLRU.contains(k) {
+            listLRU.removeAtIndex(listLRU.indexOf(k)!)
+            listLRU.append(k)
+            dictx[k] = v
+        } else {
+            // If at max capacity, remove key from list and Dictionary
+            if dictx.count == capacity {
+                dictx.removeValueForKey(listLRU.removeFirst())
+            }
+            dictx[k] = v
+            listLRU.append(k)
+        }
     }
 }

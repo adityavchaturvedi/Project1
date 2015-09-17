@@ -79,4 +79,22 @@ class LRUCacheTests: XCTestCase {
         XCTAssertNil(cache.get(3))
         XCTAssertEqual(cache.get(2)!, "World!")
     }
+    
+    func testMissComplex() {
+        let cache = LRUCache<Int, String>(capacity: 3)
+        cache.set(3, v: "Fransisco")
+        cache.set(2, v: "Domingo")
+        cache.set(3, v: "Carlos")
+        cache.set(3, v: "Andres")
+        cache.set(4, v: "D'Anconia")
+        cache.set(3, v: "Sebastian")
+        XCTAssertEqual(cache.get(3)!, "Sebastian")
+        cache.set(7, v: "Of D'Anconia Copper")
+        XCTAssertEqual(cache.get(3)!, "Sebastian")
+        XCTAssertNil(cache.get(2))
+        cache.set(27, v: "in Argentina")
+        XCTAssertNotNil(cache.get(3))
+        XCTAssertNil(cache.get(4))
+        XCTAssertEqual(cache.get(27)!, "in Argentina")
+    }
 }
