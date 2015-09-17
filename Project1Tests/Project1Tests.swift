@@ -57,7 +57,6 @@ class GOLTests: XCTestCase {
         XCTAssertEqual(expected, nextStates)
         nextStates = nextCellStates(self.statesInfinite)
     }
-
 }
 
 class LRUCacheTests: XCTestCase {
