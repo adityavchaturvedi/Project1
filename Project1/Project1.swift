@@ -1,9 +1,25 @@
+let MIN_NBR = 2
+let MAX_NBR = 3
+let REPROD_NBR = 3
+
 func totalTrueNeighbors(currentStates: [[Bool]], i: Int, j: Int) -> Int {
     return 2
 }
 
 func NextStateCellResult(numNbrs: Int, older: Bool) -> Bool {
-    return true
+    if older {
+        if (numNbrs < MIN_NBR || numNbrs > MAX_NBR) {
+            return false
+        } else {
+            return true
+        }
+    } else {
+        if numNbrs == REPROD_NBR {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 
@@ -14,13 +30,10 @@ func nextCellStates(currentStates: [[Bool]]) -> [[Bool]] {
     //Iterate through each element in the matrix to find neighbor.
     for (indexi, valuei) in currentStates.enumerate() {
         for (indexj, value) in valuei.enumerate() {
-            
             let nbrs = totalTrueNeighbors(currentStates, i: indexi, j:indexj)
             nextStates[indexi][indexj] = NextStateCellResult(nbrs, older: value)
         }
     }
-    // IMPLEMENT ME
-    // Take a look at https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life for the rules
     return nextStates
 }
 
