@@ -2,18 +2,21 @@ func totalTrueNeighbors(currentStates: [[Bool]], i: Int, j: Int) -> Int {
     return 2
 }
 
-func NextStateCellResult(numNbrs: Int) -> Bool {
-    true
+func NextStateCellResult(numNbrs: Int, older: Bool) -> Bool {
+    return true
 }
 
 
 func nextCellStates(currentStates: [[Bool]]) -> [[Bool]] {
+    //Create the returning array of same size
     var nextStates = [[Bool]](count: currentStates.count, repeatedValue: [Bool] (count: currentStates[0].count, repeatedValue: false))
     
+    //Iterate through each element in the matrix to find neighbor.
     for (indexi, valuei) in currentStates.enumerate() {
-        for (indexj, valuej) in valuei.enumerate() {
-            var neighors = totalTrueNeighbors(currentStates, i, j)
-            nextStates[i][j] = NextStateCellResult(neighors)
+        for (indexj, value) in valuei.enumerate() {
+            
+            let nbrs = totalTrueNeighbors(currentStates, i: indexi, j:indexj)
+            nextStates[indexi][indexj] = NextStateCellResult(nbrs, older: value)
         }
     }
     // IMPLEMENT ME
