@@ -84,6 +84,7 @@ func nextCellStates(currentStates: [[Bool]]) -> [[Bool]] {
 
 class LRUCache<K:Hashable, V> {
     private var capacity: Int
+    var dictx = Dictionary<K, V>()
     
     init(capacity: Int) {
         self.capacity = capacity
@@ -91,16 +92,14 @@ class LRUCache<K:Hashable, V> {
     
     func get(k: K) -> V? {
         // IMPLEMENT ME
-        
-        /*
-        *  Get the value of the key if the key exists in the cache, otherwise return nil.
-        */
-        
-        return nil
+        let v = dictx[k]
+        return v
     }
     
     func set(k: K, v: V) {
         // IMPLEMENT ME
+        dictx[k] = v
+        
         
         /*
         * Set or insert the value if the key is not already present.

@@ -39,8 +39,8 @@ class GOLTests: XCTestCase {
     }
     
     func testGOLInfinite() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // This function tests for the case when the given configuration produces
+        // the same result in the next step.
         var nextStates: [[Bool]] = nextCellStates(self.statesInfinite)
         let expected: [[Bool]] = [
         [false, true, false],
